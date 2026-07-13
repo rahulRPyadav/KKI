@@ -103,7 +103,7 @@ export default function Footer() {
 
      
       <div  className="max-w-7xl mx-auto pt-8 flex flex-col sm:flex-row justify-between items-center text-[11px] text-stone-500 tracking-wider">
-        <p>&copy; {currentYear} STUDIO.ELEGANCE / R.L. Interior. All rights reserved.</p>
+        <p>&copy; {currentYear} S R.L. Interior. All rights reserved.</p>
         <p className="mt-2 sm:mt-0 font-serif italic text-stone-400">Crafted with architectural precision.</p>
       </div>
     </footer>

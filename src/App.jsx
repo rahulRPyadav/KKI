@@ -12,6 +12,7 @@ import Projects from "./component/Projects";
 import ContactUs from "./component/ContactUs";
 import Blog from "./component/Blog";
 import Pages from "./component/Pages";
+import ScrollToTop from './component/ScrollToTop';
 import "./App.css";
 
 export default function App() {
@@ -36,8 +37,8 @@ export default function App() {
   useEffect(() => {
     AOS.init({
     
-      duration: 1000, // Animation kitni der chalega (in milliseconds)
-      once: false,    // Kya animation sirf ek baar hona chahiye?
+      duration: 1000, 
+      once: false,
     });
   }, []);
 
@@ -78,7 +79,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col justify-between selection:bg-amber-100 selection:text-amber-900">
-      
+      <ScrollToTop />
       {/* --- PREMIUM NAVBAR --- */}
       <nav className="fixed top-0 left-0 w-full bg-[#FAF9F6]/80 backdrop-blur-md z-50 border-b border-stone-200/40 px-6 py-5 md:px-12 flex justify-between items-center">
         {/* Brand Logo */}
