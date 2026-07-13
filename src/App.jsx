@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, NavLink, useNavigate } from 'react-router-dom';
-import { Menu, X, Phone, MessageCircle, Smartphone } from 'lucide-react';
+import { Phone, MessageCircle, Smartphone } from 'lucide-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -19,7 +19,7 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   
-  // --- NEW: Global Call Modal States ---
+  // --- Global Call Modal States ---
   const [globalCallModal, setGlobalCallModal] = useState(false);
   
   const navigate = useNavigate(); 
@@ -32,11 +32,8 @@ export default function App() {
     return () => clearTimeout(timer); 
   }, []);
 
-
-
   useEffect(() => {
     AOS.init({
-    
       duration: 1000, 
       once: false,
     });
@@ -52,7 +49,7 @@ export default function App() {
     { name: 'Contact Us', path: '/contact' }
   ];
 
-  // --- NEW: WhatsApp Redirect Action Logic ---
+  // --- WhatsApp Redirect Action Logic ---
   const triggerGlobalWhatsApp = () => {
     const primaryNumber = "919910889575";
     const message = encodeURIComponent("Hello R.L. Interior team, I would like to book a luxury interior design consultation call.");
@@ -80,6 +77,7 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col justify-between selection:bg-amber-100 selection:text-amber-900">
       <ScrollToTop />
+      
       {/* --- PREMIUM NAVBAR --- */}
       <nav className="fixed top-0 left-0 w-full bg-[#FAF9F6]/80 backdrop-blur-md z-50 border-b border-stone-200/40 px-6 py-5 md:px-12 flex justify-between items-center">
         {/* Brand Logo */}
@@ -114,16 +112,33 @@ export default function App() {
         {/* Right Action CTA (Desktop) */}
         <div className="hidden lg:flex items-center space-x-4">
           <button 
-            onClick={() => setGlobalCallModal(true)} // Opens routing overlay instantly
+            onClick={() => setGlobalCallModal(true)} 
             className="border border-stone-800 text-stone-800 text-[10px] tracking-widest uppercase px-5 py-2.5 hover:bg-stone-900 hover:text-white transition duration-300 cursor-pointer"
           >
             Book Call
           </button>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button className="lg:hidden text-stone-800 cursor-pointer" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        {/* --- FIXED MOBILE MENU BUTTON USING ROBUST INLINE SVG --- */}
+        <button 
+          className="lg:hidden   text-stone-800 p-2 focus:outline-none z-50 relative cursor-pointer" 
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle Menu"
+        >
+          {mobileMenuOpen ? (
+            // Close X Icon SVG
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" h="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          ) : (
+            // Hamburger Menu Icon SVG
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" h="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          )}
         </button>
       </nav>
 
@@ -186,7 +201,11 @@ export default function App() {
               onClick={() => setGlobalCallModal(false)}
               className="absolute top-4 right-4 text-stone-400 hover:text-stone-900 transition-colors cursor-pointer"
             >
-              <X size={18} />
+              {/* Native X Icon SVG */}
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
             </button>
 
             {/* Header Identity */}
