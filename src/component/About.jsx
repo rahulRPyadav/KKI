@@ -38,7 +38,7 @@ export default function AboutUs() {
     <div className="bg-[#F9F6F0] my-[-24px] py-12 px-6 md:px-12 lg:px-24 text-[#2c221e] animate-fadeIn space-y-24 border-b border-[#e6dfd3]">
       
       {/* --- SECTION 1: ABOUT STUDIO --- */}
-      <section className="max-w-5xl mx-auto text-left pt-6">
+      <section  data-aos="fade-up" className="max-w-5xl mx-auto text-left pt-6">
         <p className="text-[10px] tracking-[0.4em] text-amber-700 uppercase mb-3 font-semibold font-sans">
           Who We Are
         </p>
@@ -72,7 +72,7 @@ export default function AboutUs() {
       </section>
 
       {/* --- SECTION 2: FOUNDER & PRINCIPAL --- */}
-      <section className="max-w-5xl mx-auto text-left border-t border-[#e6dfd3] pt-16">
+      <section  data-aos="fade-left" className="max-w-5xl mx-auto text-left border-t border-[#e6dfd3] pt-16">
         <p className="text-[10px] tracking-[0.4em] text-amber-700 uppercase mb-3 font-semibold font-sans">
           The Mind Behind The Studio
         </p>
@@ -80,7 +80,7 @@ export default function AboutUs() {
           Founder & Principal
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div  className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           <div className="lg:col-span-7 space-y-6">
             <div>
               <h3 className="text-2xl md:text-3xl font-serif text-[#1c1613] font-light">
@@ -107,11 +107,11 @@ export default function AboutUs() {
             </div>
           </div>
 
-          {/* Elegant Framed Founder Photo & Timber Counter */}
+         
           <div className="lg:col-span-5 space-y-12 w-full">
             <div className="w-full h-80 bg-[#f0eae1] p-3 border border-[#e2d9cc] shadow-xl overflow-hidden group">
               <div className="w-full h-full overflow-hidden relative">
-                <img
+                <img  data-aos="zoom-in"
                   src={FounderPic}
                   alt="Founder"
                   className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
@@ -146,7 +146,7 @@ export default function AboutUs() {
       </section>
 
       {/* --- NEW SECTION: OUR ARCHITECTURAL APPROACH --- */}
-      <section className="max-w-5xl mx-auto text-left border-t border-[#e6dfd3] pt-16">
+      <section  data-aos="fade-right" className="max-w-5xl mx-auto text-left border-t border-[#e6dfd3] pt-16">
         <p className="text-[10px] tracking-[0.4em] text-amber-700 uppercase mb-3 font-semibold font-sans">
           The Craft Process
         </p>
@@ -173,7 +173,7 @@ export default function AboutUs() {
       </section>
 
       {/* --- SECTION 3: MISSION, VISION & CORE VALUES --- */}
-      <section className="max-w-5xl mx-auto text-left border-t border-[#e6dfd3] pt-16 pb-4">
+      <section  data-aos="fade-left" className="max-w-5xl mx-auto text-left border-t border-[#e6dfd3] pt-16 pb-4">
         <p className="text-[10px] tracking-[0.4em] text-amber-700 uppercase mb-3 font-semibold font-sans">
           Our Blueprint
         </p>

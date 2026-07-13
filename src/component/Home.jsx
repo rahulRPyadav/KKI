@@ -75,20 +75,20 @@ export default function Home({ setActiveTab }) {
               index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           >
-            {/* Background Image Overlay with Rich Timber Tint */}
-            <img src={slide.url} alt={slide.title} className="w-full h-full object-cover scale-105 animate-subtleZoom" />
+          
+            <img   data-aos="zoom-in" src={slide.url} alt={slide.title} className="w-full h-full object-cover scale-105 animate-subtleZoom" />
             <div className="absolute inset-0 bg-gradient-to-r from-[#1c1613]/80 via-[#1c1613]/50 to-transparent" />
             
             <div className="absolute inset-0 flex flex-col justify-center items-start px-6 md:px-24 lg:px-32 text-left">
-              <p className="text-[10px] md:text-xs tracking-[0.4em] text-amber-600 uppercase mb-4 font-semibold font-sans">
+              <p  className="text-[10px] md:text-xs tracking-[0.4em] text-amber-600 uppercase mb-4 font-semibold font-sans">
                 {slide.tag}
               </p>
-              <h1 className="text-4xl md:text-7xl font-serif font-light text-[#F4F1EA] max-w-4xl leading-[1.15] tracking-wide">
+              <h1 data-aos="zoom-out" className="text-4xl md:text-7xl font-serif font-light text-[#F4F1EA] max-w-4xl leading-[1.15] tracking-wide">
                 {slide.title} <br />
                 <span className="italic font-light text-amber-100/80 font-serif block mt-2">{slide.subtitle}</span>
               </h1>
               
-              {/* Premium Wooden/Oak Styled Action Button */}
+            
               <button
                 onClick={() => setActiveTab('Projects')}
                 className="mt-8 bg-[#3d2f26] border border-[#524033] text-[#F4F1EA] text-[10px] md:text-xs tracking-[0.25em] uppercase px-8 py-4 hover:bg-amber-800 hover:border-amber-700 transition-all duration-300 flex items-center space-x-3 cursor-pointer shadow-xl backdrop-blur-sm"
@@ -100,8 +100,8 @@ export default function Home({ setActiveTab }) {
           </div>
         ))}
 
-        {/* Minimalist Slide Linear Dash Indicators */}
-        <div className="absolute bottom-10 left-6 md:left-24 z-20 flex space-x-4 items-center">
+      
+        <div  className="absolute bottom-10 left-6 md:left-24 z-20 flex space-x-4 items-center">
           {slides.map((_, index) => (
             <button
               key={index}
@@ -114,8 +114,7 @@ export default function Home({ setActiveTab }) {
         </div>
       </div>
 
-      {/* --- OAK & LINEN STATS & SERVICES SECTION --- */}
-      <section className="bg-[#F9F6F0] py-16 md:py-28 px-6 md:px-12 lg:px-24 border-b border-[#e6dfd3]">
+      <section  data-aos="zoom-in" className="bg-[#F9F6F0] py-16 md:py-28 px-6 md:px-12 lg:px-24 border-b border-[#e6dfd3]">
         <div className="max-w-7xl mx-auto flex flex-col lg:grid lg:grid-cols-12 gap-16 lg:gap-12 items-center">
           
           {/* Left Block: Warm Accent Live Counter */}

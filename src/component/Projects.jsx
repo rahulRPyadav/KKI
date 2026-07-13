@@ -205,7 +205,7 @@ export default function Projects() {
     <div className="bg-[#FAF9F6] py-16 px-6 md:px-12 lg:px-24 text-stone-800 animate-fadeIn space-y-16">
       
       {/* --- HEADER CONTROLLERS --- */}
-      <section className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8 mt-8 border-b border-stone-200/60 pb-8">
+      <section data-aos="fade-down" className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8 mt-8 border-b border-stone-200/60 pb-8">
         <div className="text-left max-w-2xl">
           <p className="text-[10px] tracking-[0.3em] text-amber-800 uppercase mb-3 font-semibold">Our Portfolio</p>
           <h2 className="text-3xl md:text-5xl font-serif font-light tracking-wide text-stone-800 mb-4 uppercase">
@@ -221,7 +221,7 @@ export default function Projects() {
         </div>
 
         {/* Segment Capsule Switcher Buttons */}
-        <div className="flex bg-stone-100 p-1 rounded-sm border border-stone-200/40 select-none">
+        <div  className="flex bg-stone-100 p-1 rounded-sm border border-stone-200/40 select-none">
           {["Residential", "Commercial"].map((segment) => (
             <button
               key={segment}
@@ -239,10 +239,10 @@ export default function Projects() {
       </section>
 
       {/* --- LIVE INTERACTIVE PORTFOLIO GRID --- */}
-      <section className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section data-aos="fade-down" className="max-w-6xl mx-auto">
+        <div  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {currentProjects.map((project, index) => (
-            <ProjectCard key={`${activeSegment}-${index}`} project={project} />
+            <ProjectCard  key={`${activeSegment}-${index}`} project={project} />
           ))}
         </div>
       </section>
@@ -319,7 +319,7 @@ function ProjectCard({ project }) {
       className="group relative flex flex-col bg-white border border-stone-200/40 overflow-hidden shadow-xs transition-all duration-500 hover:shadow-md animate-fadeIn"
     >
       {/* Image Gallery Canvas */}
-      <div className="relative aspect-[4/3] bg-stone-950 overflow-hidden select-none">
+      <div data-aos="zoom-in" className="relative aspect-[4/3] bg-stone-950 overflow-hidden select-none">
         <img 
           src={project.images[imgIndex]} 
           alt={project.name} 

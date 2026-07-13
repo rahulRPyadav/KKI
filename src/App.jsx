@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, NavLink, useNavigate } from 'react-router-dom';
 import { Menu, X, Phone, MessageCircle, Smartphone } from 'lucide-react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 import Home from './component/Home';
 import AboutUs from './component/About';
@@ -25,6 +27,16 @@ export default function App() {
     }, 500); 
 
     return () => clearTimeout(timer); 
+  }, []);
+
+
+
+  useEffect(() => {
+    AOS.init({
+    
+      duration: 1000, // Animation kitni der chalega (in milliseconds)
+      once: false,    // Kya animation sirf ek baar hona chahiye?
+    });
   }, []);
 
   const tabs = [

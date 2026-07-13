@@ -50,7 +50,7 @@ export default function Services() {
     <div className="bg-[#FAF9F6] mt-[-18px] py-16 px-6 md:px-12 lg:px-24 text-stone-800 animate-fadeIn space-y-16">
       
       {/* --- HEADER SECTION --- */}
-      <section className="max-w-5xl mx-auto text-left mt-8">
+      <section  data-aos="fade-right" className="max-w-5xl mx-auto text-left mt-8">
         <p className="text-[10px] tracking-[0.3em] text-amber-800 uppercase mb-3 font-semibold">What We Do</p>
         <h2 className="text-3xl md:text-5xl font-serif font-light tracking-wide text-stone-800 mb-6 uppercase">Our Services</h2>
         <p className="text-sm md:text-base text-stone-600 font-light leading-relaxed max-w-3xl">
@@ -59,7 +59,7 @@ export default function Services() {
       </section>
 
       {/* --- SERVICES GRID DISPLAY --- */}
-      <section className="max-w-5xl mx-auto">
+      <section  data-aos="fade-left" className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
           {serviceList.map((service) => (
             <div 
@@ -78,7 +78,7 @@ export default function Services() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-lg md:text-xl font-serif font-light text-stone-900 group-hover:text-amber-900 transition-colors duration-300">
+                <h3 data-aos="fade-right" className="text-lg md:text-xl font-serif font-light text-stone-900 group-hover:text-amber-900 transition-colors duration-300">
                   {service.title}
                 </h3>
 

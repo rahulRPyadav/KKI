@@ -27,7 +27,7 @@ export default function ContactUs() {
       <div className="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 mt-8 items-stretch">
         
         {/* --- LEFT SIDE: THE PREMIUM BRAND DETAILS CARD (6 Columns) --- */}
-        <div className="lg:col-span-6 bg-[#1C2D37] text-white p-8 md:p-12 flex flex-col justify-between relative overflow-hidden border border-stone-800 shadow-xl rounded-xs">
+        <div data-aos="fade-left" className="lg:col-span-6 bg-[#1C2D37] text-white p-8 md:p-12 flex flex-col justify-between relative overflow-hidden border border-stone-800 shadow-xl rounded-xs">
           <div className="absolute inset-0 opacity-[0.02] bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:30px_30px]" />
           
           <div className="space-y-8 relative z-10 text-left">
@@ -81,7 +81,7 @@ export default function ContactUs() {
         </div>
 
         {/* --- RIGHT SIDE: CONSULTATION INTAKE FORM (6 Columns) --- */}
-        <div className="lg:col-span-6 flex flex-col justify-center bg-white p-8 md:p-12 border border-stone-200/60 shadow-xs rounded-xs">
+        <div data-aos="fade-right" className="lg:col-span-6 flex flex-col justify-center bg-white p-8 md:p-12 border border-stone-200/60 shadow-xs rounded-xs">
           <div className="text-left mb-8">
             <h3 className="text-xl font-serif text-stone-900 tracking-wide uppercase">Request a Design Consultation</h3>
             <p className="text-xs text-stone-400 font-light mt-1">Let us bring your vision to life. Share your space details below.</p>
