@@ -10,6 +10,8 @@ import Footer from './component/Footer';
 import Services from "./component/Services";
 import Projects from "./component/Projects";
 import ContactUs from "./component/ContactUs";
+import Blog from "./component/Blog";
+import Pages from "./component/Pages";
 import "./App.css";
 
 export default function App() {
@@ -167,8 +169,8 @@ export default function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/services" element={<Services />} />
           <Route path="/projects" element={<Projects />} />
-          <Route path="/blog" element={<div className="text-center py-12 text-stone-400 italic font-serif">Blog Component Coming Soon...</div>} />
-          <Route path="/pages" element={<div className="text-center py-12 text-stone-400 italic font-serif">Pages Component Coming Soon...</div>} />
+          <Route path="/blog" element={<Blog/>} />
+          <Route path="/pages" element={<Pages />} />
           <Route path="/contact" element={<ContactUs />} />
         </Routes>
       </main>
