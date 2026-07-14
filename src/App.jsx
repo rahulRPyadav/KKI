@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Routes, Route, NavLink, useNavigate } from 'react-router-dom';
 import { Phone, MessageCircle, Smartphone } from 'lucide-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Logo from "./assets/rl-logo.png";
 
 import Home from './component/Home';
 import AboutUs from './component/About';
@@ -11,18 +12,24 @@ import Services from "./component/Services";
 import Projects from "./component/Projects";
 import ContactUs from "./component/ContactUs";
 import Blog from "./component/Blog";
-import Pages from "./component/Pages";
+import Faq from "./component/Faq";
+import Testimonial from "./component/Testimonial";
+
+
+
 import ScrollToTop from './component/ScrollToTop';
 import "./App.css";
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [pagesDropdownOpen, setPagesDropdownOpen] = useState(false);
+  const [mobilePagesOpen, setMobilePagesOpen] = useState(false);
   
-  // --- Global Call Modal States ---
   const [globalCallModal, setGlobalCallModal] = useState(false);
   
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -39,17 +46,30 @@ export default function App() {
     });
   }, []);
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setPagesDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const tabs = [
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
     { name: 'Services', path: '/services' },
     { name: 'Projects', path: '/projects' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Pages', path: '/pages' },
     { name: 'Contact Us', path: '/contact' }
   ];
 
-  // --- WhatsApp Redirect Action Logic ---
+  const pageSubItems = [
+    { name: 'Blog', path: '/blog' },
+    { name: 'FAQ', path: '/faq' },
+    { name: 'Testimonials', path: '/testimonial' }
+  ];
+
   const triggerGlobalWhatsApp = () => {
     const primaryNumber = "919910889575";
     const message = encodeURIComponent("Hello R.L. Interior team, I would like to book a luxury interior design consultation call.");
@@ -57,7 +77,6 @@ export default function App() {
     setGlobalCallModal(false);
   };
 
-  // --- 1. LOADER SCREEN ---
   if (isLoading) {
     return (
       <div className="fixed inset-0 bg-[#FAF9F6] z-[9999] flex flex-col justify-center items-center">
@@ -82,11 +101,16 @@ export default function App() {
       <nav className="fixed top-0 left-0 w-full bg-[#FAF9F6]/80 backdrop-blur-md z-50 border-b border-stone-200/40 px-6 py-5 md:px-12 flex justify-between items-center">
         {/* Brand Logo */}
         <div className="text-xl md:text-2xl font-serif tracking-[0.2em] text-stone-800 cursor-pointer" onClick={() => navigate('/')}>
-          RL<span className="italic text-amber-800 font-light">.interior</span>
+          <img 
+            data-aos="zoom-in"
+            src={Logo}
+            alt="Founder"
+            className="w-[90px] h-[50px] object-cover object-center"
+          />
         </div>
 
         {/* Desktop Tabs */}
-        <div className="hidden lg:flex space-x-8 text-xs uppercase tracking-[0.15em] font-medium">
+        <div className="hidden lg:flex items-center space-x-8 text-xs uppercase tracking-[0.15em] font-medium">
           {tabs.map((tab) => (
             <NavLink
               key={tab.name}
@@ -107,6 +131,59 @@ export default function App() {
               )}
             </NavLink>
           ))}
+
+          {/* Fixed Pages Dropdown Container */}
+          <div 
+            ref={dropdownRef}
+            className="relative py-2 cursor-pointer group"
+            onMouseEnter={() => setPagesDropdownOpen(true)}
+            onMouseLeave={() => setPagesDropdownOpen(false)}
+          >
+            <span className="text-stone-500 hover:text-stone-900 transition-colors duration-200 flex items-center space-x-1">
+              <span>Pages</span>
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="12" 
+                height="12" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.5" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className={`transition-transform duration-300 ${pagesDropdownOpen ? 'rotate-180' : 'rotate-0'}`}
+              >
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+
+            {/* Dropdown Menu Overlay (With padding bridge to prevent hover loss) */}
+            <div 
+              className={`absolute top-full left-0 w-44 pt-2 transition-all duration-300 origin-top z-50 ${
+                pagesDropdownOpen 
+                  ? 'opacity-100 scale-100 pointer-events-auto translate-y-0' 
+                  : 'opacity-0 scale-95 pointer-events-none -translate-y-2'
+              }`}
+            >
+              {/* Actual Visual Box */}
+              <div className="bg-[#FAF9F6] border border-stone-200/60 shadow-xl rounded-sm p-2 flex flex-col space-y-1">
+                {pageSubItems.map((subItem) => (
+                  <NavLink
+                    key={subItem.name}
+                    to={subItem.path}
+                    onClick={() => setPagesDropdownOpen(false)}
+                    className={({ isActive }) => 
+                      `px-3 py-2 text-[10px] tracking-widest text-left uppercase transition-all duration-200 rounded-xs hover:bg-[#1c1613] hover:text-[#FAF9F6] ${
+                        isActive ? 'bg-amber-800/10 text-amber-800 font-semibold' : 'text-stone-600'
+                      }`
+                    }
+                  >
+                    {subItem.name}
+                  </NavLink>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Right Action CTA (Desktop) */}
@@ -119,21 +196,19 @@ export default function App() {
           </button>
         </div>
 
-        {/* --- FIXED MOBILE MENU BUTTON USING ROBUST INLINE SVG --- */}
+        {/* --- MOBILE MENU BUTTON --- */}
         <button 
-          className="lg:hidden   text-stone-800 p-2 focus:outline-none z-50 relative cursor-pointer" 
+          className="lg:hidden text-stone-800 p-2 focus:outline-none z-50 relative cursor-pointer" 
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle Menu"
         >
           {mobileMenuOpen ? (
-            // Close X Icon SVG
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" h="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
           ) : (
-            // Hamburger Menu Icon SVG
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" h="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="3" y1="12" x2="21" y2="12"></line>
               <line x1="3" y1="6" x2="21" y2="6"></line>
               <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -144,15 +219,15 @@ export default function App() {
 
       {/* --- MOBILE DROPDOWN MENU --- */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 bg-[#FAF9F6] z-40 pt-24 px-6 flex flex-col justify-between pb-12 lg:hidden animate-fadeIn">
-          <div className="flex flex-col space-y-6">
+        <div className="fixed inset-0 bg-[#FAF9F6] z-40 pt-24 px-6 flex flex-col justify-between pb-12 lg:hidden overflow-y-auto animate-fadeIn">
+          <div className="flex flex-col space-y-5">
             {tabs.map((tab) => (
               <NavLink
                 key={tab.name}
                 to={tab.path}
                 onClick={() => setMobileMenuOpen(false)}
                 className={({ isActive }) => 
-                  `text-left text-xl font-serif tracking-wide ${
+                  `text-left text-lg font-serif tracking-wide ${
                     isActive ? 'text-amber-800' : 'text-stone-600'
                   }`
                 }
@@ -160,10 +235,57 @@ export default function App() {
                 {tab.name}
               </NavLink>
             ))}
+
+            {/* Mobile "Pages" Accordion Dropdown */}
+            <div className="flex flex-col">
+              <button 
+                onClick={() => setMobilePagesOpen(!mobilePagesOpen)}
+                className="text-left text-lg font-serif tracking-wide text-stone-600 flex items-center justify-between py-1 focus:outline-none"
+              >
+                <span>Pages</span>
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="18" 
+                  height="18" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  className={`transition-transform duration-300 ${mobilePagesOpen ? 'rotate-180' : 'rotate-0'}`}
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <div 
+                className={`pl-4 flex flex-col space-y-3 transition-all duration-300 overflow-hidden ${
+                  mobilePagesOpen ? 'max-h-48 mt-3 opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
+                {pageSubItems.map((subItem) => (
+                  <NavLink
+                    key={subItem.name}
+                    to={subItem.path}
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setMobilePagesOpen(false);
+                    }}
+                    className={({ isActive }) => 
+                      `text-left text-[14px] font-sans tracking-wider ${
+                        isActive ? 'text-amber-800 font-semibold' : 'text-stone-500'
+                      }`
+                    }
+                  >
+                    • {subItem.name}
+                  </NavLink>
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* Call CTA Inside Mobile Menu Drawer */}
-          <div className="w-full pt-6 border-t border-stone-200">
+          <div className="w-full pt-6 border-t border-stone-200 mt-6">
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
@@ -178,15 +300,16 @@ export default function App() {
         </div>
       )}
 
-      {/* --- MAIN CONTENT AREA (Dynamic Routing) --- */}
+      {/* --- MAIN CONTENT AREA --- */}
       <main className="pt-24 flex-grow">
         <Routes>
           <Route path="/" element={<Home navigate={navigate} />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/services" element={<Services />} />
           <Route path="/projects" element={<Projects />} />
-          <Route path="/blog" element={<Blog/>} />
-          <Route path="/pages" element={<Pages />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/testimonial" element={<Testimonial />} />
           <Route path="/contact" element={<ContactUs />} />
         </Routes>
       </main>
@@ -195,20 +318,16 @@ export default function App() {
       {globalCallModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center z-[9999] px-4 animate-fadeIn">
           <div className="bg-[#FAF9F6] max-w-sm w-full border border-stone-200 p-8 text-center relative shadow-2xl rounded-xs">
-            
-            {/* Close Button Trigger */}
             <button 
               onClick={() => setGlobalCallModal(false)}
               className="absolute top-4 right-4 text-stone-400 hover:text-stone-900 transition-colors cursor-pointer"
             >
-              {/* Native X Icon SVG */}
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
               </svg>
             </button>
 
-            {/* Header Identity */}
             <div className="mb-6">
               <div className="mx-auto w-10 h-10 bg-amber-50 text-amber-800 rounded-full flex items-center justify-center mb-3">
                 <Phone size={18} />
@@ -217,9 +336,7 @@ export default function App() {
               <p className="text-xs text-stone-400 font-light mt-1">Connect instantly with R.L. Interior desk.</p>
             </div>
 
-            {/* Selection Options Grid */}
             <div className="space-y-3 text-left">
-              {/* Option A: WhatsApp Route with auto message */}
               <button
                 onClick={triggerGlobalWhatsApp}
                 className="w-full border border-stone-200 hover:border-emerald-600 bg-white hover:bg-emerald-50 text-stone-800 hover:text-emerald-900 transition-all duration-300 py-3 px-4 text-[11px] uppercase tracking-widest font-medium flex items-center justify-between rounded-xs cursor-pointer group"
@@ -231,7 +348,6 @@ export default function App() {
                 <span className="text-[9px] text-emerald-600 font-semibold uppercase tracking-wider bg-emerald-100/50 px-2 py-0.5 rounded-xs">Online</span>
               </button>
 
-              {/* Option B: Standard Native Cellular Dialing */}
               <a
                 href="tel:+919910889575"
                 onClick={() => setGlobalCallModal(false)}
