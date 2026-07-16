@@ -32,7 +32,7 @@ export default function ConsultationForm() {
       return;
     }
 
-    const myWhatsAppNumber = "919910889575";
+    const myWhatsAppNumber = "917357121156";
 
     // Layout formatting for WhatsApp message window
     let messageText = `*✨ LUXURY CONSULTATION REQUEST ✨*\n\n`;
