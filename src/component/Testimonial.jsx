@@ -50,7 +50,7 @@ export default function Testimonial() {
   ];
 
   return (
-    <section className="bg-[#FAF9F6] mt-[-90px] min-h-screen pt-32 pb-20 px-6 md:px-12 lg:px-24 select-none font-sans">
+    <section className="bg-gradient-to-b from-[#766940] via-[#92845a] to-[#ad9a65] mt-[-90px] min-h-screen pt-32 pb-20 px-6 md:px-12 lg:px-24 select-none font-sans">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Header */}
@@ -68,16 +68,16 @@ export default function Testimonial() {
         </div>
 
         {/* Testimonials Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="mt-[-69px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((item, index) => (
             <div 
               key={item.id}
               data-aos="fade-up"
               data-aos-delay={index * 100}
-              className="bg-white border border-stone-200/60 rounded-sm p-8 flex flex-col justify-between transition-all duration-300 hover:border-amber-800/40 hover:shadow-xl hover:shadow-stone-200/50 group relative"
+              className="bg-[#ad9a65] border border-stone-200/60 rounded-sm p-8 flex flex-col justify-between transition-all duration-300 hover:border-amber-800/40 hover:shadow-xl hover:shadow-stone-200/50 group relative"
             >
               {/* Decorative Quote Icon */}
-              <div className="absolute top-6 right-8 text-stone-100 group-hover:text-amber-50/70 transition-colors duration-300 pointer-events-none">
+              <div className="absolute top-2 right-8 text-stone-900 group-hover:text-amber-50/70 transition-colors duration-300 pointer-events-none">
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor" className="opacity-40">
                   <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                 </svg>
@@ -94,13 +94,13 @@ export default function Testimonial() {
                   ))}
                 </div>
 
-                <p className="text-xs text-stone-500 leading-relaxed font-light italic">
+                <p className="text-xs text-stone-900 leading-relaxed font-light italic">
                   "{item.review}"
                 </p>
               </div>
 
               {/* Client Info Meta Row */}
-              <div className="flex items-center space-x-4 pt-8 mt-6 border-t border-stone-100">
+              <div className="flex items-center space-x-4 pt-8 mt-6 border-t border-stone-800">
                 <img 
                   src={item.image} 
                   alt={item.name} 
@@ -111,7 +111,7 @@ export default function Testimonial() {
                     {item.name}
                   </h4>
                   <p className="text-[10px] text-amber-800 font-light">
-                    {item.role} — <span className="text-stone-400 font-sans">{item.project}</span>
+                    {item.role} — <span className="text-stone-900 font-sans">{item.project}</span>
                   </p>
                 </div>
               </div>

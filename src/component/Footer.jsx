@@ -157,7 +157,7 @@ export default function Footer() {
       {/* Copyright Footer */}
       <div className="max-w-7xl mx-auto pt-8 flex flex-col sm:flex-row justify-between items-center text-[11px] text-stone-500 tracking-wider">
         <p>© {currentYear} R.L. Interior. All rights reserved.</p>
-        <p className="mt-2 sm:mt-0 font-serif italic text-stone-400">Made With ❤️ By RP Yadav</p>
+        {/* <p className="mt-2 sm:mt-0 font-serif italic text-stone-400">Made With ❤️ By RP Yadav</p> */}
       </div>
     </footer>
   );

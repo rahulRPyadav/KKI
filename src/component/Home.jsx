@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import ConsultationForm from "./ConsultationForm";
 
 import {
   ArrowUpRight,
@@ -9,7 +10,6 @@ import {
   DollarSign,
   Handshake,
   Wrench,
-  Upload,
   Phone,
   Mail,
   MessageSquare,
@@ -20,17 +20,18 @@ export default function Home({ setActiveTab }) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
-    {
-      url: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1920",
-      title: "Crafting Spaces,",
-      subtitle: "Inspiring Everyday Life.",
-      tag: "Luxury Interior Architecture",
-    },
+  
     {
       url: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1920",
       title: "Modern Elegance,",
       subtitle: "Redefining Comfort.",
       tag: "Bespoke Residential Design",
+    },
+      {
+      url: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1920",
+      title: "Crafting Spaces,",
+      subtitle: "Inspiring Everyday Life.",
+      tag: "Luxury Interior Architecture",
     },
     {
       url: "https://images.unsplash.com/photo-1616137466211-f939a420be84?q=80&w=1920",
@@ -59,31 +60,13 @@ export default function Home({ setActiveTab }) {
   const hasAnimated = useRef(false);
   const navigate = useNavigate();
 
-  // --- CONTACT FORM STATES ---
-  const [formData, setFormData] = useState({
-    fullName: "",
-    mobileNumber: "",
-    emailAddress: "",
-    serviceType: "Designing",
-    projectType: "Residential Interior",
-    floorPlan: "2 BHK Interior Design",
-    projectAddress: "",
-    requirements: "",
-    agreeToTerms: false,
-  });
-  const [uploadedFile, setUploadedFile] = useState(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const fileInputRef = useRef(null);
-
-
-    // User ke click karne ke liye original link
-  const myGoogleMapLink = "https://www.google.com/maps/place/855,+Sector+51,+Gurugram,+Haryana+122018/@28.432401,77.06171,614m/data=!3m2!1e3!4b1!4m6!3m5!1s0x390d188442b0dcc9:0x642bc5a1d851954d!8m2!3d28.4323963!4d77.0642849!16s%2Fg%2F11vyx818lx?entry=ttu&g_ep=EgoyMDI2MDcwOC4wIKXMDSoASAFQAw%3D%3D";
+  // User ke click karne ke liye original link
+  const myGoogleMapLink =
+    "https://www.google.com/maps/place/855,+Sector+51,+Gurugram,+Haryana+122018/@28.432401,77.06171,614m/data=!3m2!1e3!4b1!4m6!3m5!1s0x390d188442b0dcc9:0x642bc5a1d851954d!8m2!3d28.4323963!4d77.0642849!16s%2Fg%2F11vyx818lx?entry=ttu&g_ep=EgoyMDI2MDcwOC4wIKXMDSoASAFQAw%3D%3D";
 
   // Iframe ke andar real map show karne ke liye official EMBED URL
-  const iframeEmbedSrc = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3509.3496081515254!2d77.06171007632688!3d28.432400975774304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d188442b0dcc9%3A0x642bc5a1d851954d!2s855%2C%20Sector%2051%2C%20Gurugram%2C%20Haryana%20122018!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin";
-
-
-
+  const iframeEmbedSrc =
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3509.3496081515254!2d77.06171007632688!3d28.432400975774304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d188442b0dcc9%3A0x642bc5a1d851954d!2s855%2C%20Sector%2051%2C%20Gurugram%2C%20Haryana%20122018!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin";
 
   // // --- WHY WORK WITH US FEATURES DATA ---
   const features = [
@@ -259,50 +242,6 @@ export default function Home({ setActiveTab }) {
     };
   }, []);
 
-  // --- FORM HANDLERS ---
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const handleFileChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setUploadedFile(e.target.files[0]);
-    }
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-    setIsDragging(true);
-  };
-
-  const handleDragLeave = () => {
-    setIsDragging(false);
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    setIsDragging(false);
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      setUploadedFile(e.dataTransfer.files[0]);
-    }
-  };
-
-  const removeFile = () => {
-    setUploadedFile(null);
-    if (fileInputRef.current) fileInputRef.current.value = "";
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Data:", formData);
-    console.log("File:", uploadedFile);
-    alert("Thank you! Your consultation request has been sent.");
-  };
-
   // --- SOCIAL MEDIA LINKS DATA ---
   const socialLinks = [
     {
@@ -378,11 +317,9 @@ export default function Home({ setActiveTab }) {
   ];
 
   return (
-    <div className="animate-fadeIn">
+    <div className="animate-fadeIn" >
       {/* ========================================== */}
-      {/* --- 1. PREMIUM WOODEN HERO SLIDER ---      */}
-
-      {/* --- CINEMATIC HERO SLIDER WITH DYNAMIC CURSOR MOUSE BLUR --- */}
+      {/* --- 1. PREMIUM WOODEN HERO SLIDER (FLAT BOTTOM) --- */}
       <div
         className="relative h-[80vh] md:h-[90vh] mt-[-24px] w-full overflow-hidden bg-[#1c1613] select-none cursor-none"
         onMouseMove={handleMouseMove}
@@ -398,16 +335,12 @@ export default function Home({ setActiveTab }) {
                 isActive ? "opacity-100 z-10" : "opacity-0 z-0"
               }`}
             >
-              {/* Base Premium Photo Layer */}
               <img
                 src={slide.url}
                 alt={slide.title}
-                className={`w-full h-full object-cover ${
-                  isActive ? "premium-fade-zoom" : "scale-100"
-                }`}
+                className={`w-full h-full object-cover ${isActive ? "premium-fade-zoom" : "scale-100"}`}
               />
 
-              {/* Dynamic 50px Glass Blur Spot Layer following the cursor */}
               {isActive && isHovered && (
                 <div
                   className="absolute inset-0 pointer-events-none backdrop-blur-md z-20"
@@ -418,10 +351,8 @@ export default function Home({ setActiveTab }) {
                 />
               )}
 
-              {/* Luxury dark subtle gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-r from-[#1c1613]/85 via-[#1c1613]/40 to-transparent z-30" />
 
-              {/* Slider Text Contents */}
               <div className="absolute inset-0 flex flex-col justify-center items-start px-6 md:px-24 lg:px-32 text-left z-40 pointer-events-auto">
                 <p className="text-[10px] md:text-xs tracking-[0.4em] text-amber-500 uppercase mb-4 font-semibold font-sans">
                   {slide.tag}
@@ -433,7 +364,6 @@ export default function Home({ setActiveTab }) {
                   </span>
                 </h1>
 
-                {/* Explore Portfolio Action */}
                 <button
                   onClick={() => navigate("/projects")}
                   className="mt-8 bg-[#3d2f26]/95 border border-[#524033] text-[#F4F1EA] text-[10px] md:text-xs tracking-[0.25em] uppercase px-8 py-4 hover:bg-amber-800 hover:border-amber-700 transition-all duration-300 flex items-center space-x-3 cursor-pointer shadow-xl rounded-sm"
@@ -446,18 +376,9 @@ export default function Home({ setActiveTab }) {
           );
         })}
 
-        {/* Simple Premium Bottom Curve */}
-        <div className="absolute bottom-0 left-0 w-full z-40 overflow-hidden leading-[0]">
-          <svg
-            viewBox="0 0 1200 120"
-            preserveAspectRatio="none"
-            className="relative block w-full h-[30px] md:h-[50px] fill-[#FAF9F6]"
-          >
-            <path d="M0,0 C300,60 900,60 1200,0 L1200,120 L0,120 Z"></path>
-          </svg>
-        </div>
+        {/* Flat White Bottom Line instead of Curve SVG */}
+        <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[#FAF9F6] z-40" />
 
-        {/* Slider Navigation Indicators */}
         <div className="absolute bottom-12 left-6 md:left-24 z-50 flex space-x-3 items-center">
           {slides.map((_, index) => (
             <button
@@ -475,13 +396,11 @@ export default function Home({ setActiveTab }) {
 
       {/* ========================================== */}
       {/* --- 2. EXPERTISE & LIVE COUNTER SECTION --- */}
-      {/* ========================================== */}
       <section
-        data-aos="zoom-in"
-        className="bg-[#F9F6F0] py-16 md:py-28 px-6 md:px-12 lg:px-24 border-b border-[#e6dfd3]"
+        data-aos="zoom-out"
+        className="bg-gradient-to-b from-[#ffe9a6] via-[#92845a] to-[#ad9a65] py-16 md:py-28 px-6 md:px-12 lg:px-24 border-b border-[#e6dfd3]"
       >
-        <div className="max-w-7xl mx-auto flex flex-col lg:grid lg:grid-cols-12 gap-16 lg:gap-12 items-center">
-          {/* Left Block: Warm Accent Live Counter */}
+        <div className="  max-w-7xl mx-auto flex flex-col lg:grid lg:grid-cols-12 gap-16 lg:gap-12 items-center">
           <div
             ref={countRef}
             className="w-full lg:col-span-5 grid grid-cols-2 gap-6 items-start lg:border-r border-[#e6dfd3] lg:pr-12"
@@ -498,7 +417,7 @@ export default function Home({ setActiveTab }) {
               </p>
             </div>
             <div className="space-y-4 pt-2">
-              <p className="text-xs md:text-[13px] text-[#6b584c] font-light leading-relaxed">
+              <p className="text-xs md:text-[13px] text-[#2c221e] font-light leading-relaxed">
                 We design environments that marry structural integrity with rich
                 organic elements, turning native spaces into tactile poetry.
               </p>
@@ -509,7 +428,6 @@ export default function Home({ setActiveTab }) {
             </div>
           </div>
 
-          {/* Right Block: 3 Luxurious Oak-Themed Cards */}
           <div className="w-full lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 lg:pl-4">
             <div className="flex flex-col items-start space-y-4 group">
               <div className="p-3 bg-[#f0eae1] rounded-xs text-amber-900 border border-[#e2d9cc] group-hover:bg-[#3d2f26] group-hover:text-[#F4F1EA] transition-all duration-300">
@@ -526,7 +444,7 @@ export default function Home({ setActiveTab }) {
               <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-[#2c221e]">
                 Space Planning
               </h3>
-              <p className="text-[12px] text-[#7c695e] font-light leading-relaxed">
+              <p className="text-[12px] text-[#2c221e] font-light leading-relaxed">
                 Architectural floor layouts optimized for daylight routing and
                 seamless organic circulation.
               </p>
@@ -547,7 +465,7 @@ export default function Home({ setActiveTab }) {
               <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-[#2c221e]">
                 Interior Design
               </h3>
-              <p className="text-[12px] text-[#7c695e] font-light leading-relaxed">
+              <p className="text-[12px] text-[#2c221e] font-light leading-relaxed">
                 Curating tactile raw textures, neutral tone schemes, and bespoke
                 wall wood panelling.
               </p>
@@ -567,7 +485,7 @@ export default function Home({ setActiveTab }) {
               <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-[#2c221e]">
                 Furniture Design
               </h3>
-              <p className="text-[12px] text-[#7c695e] font-light leading-relaxed">
+              <p className="text-[12px] text-[#2c221e] font-light leading-relaxed">
                 Handmade joinery and customizable solid walnut elements built
                 for generational durability.
               </p>
@@ -578,10 +496,8 @@ export default function Home({ setActiveTab }) {
 
       {/* ========================================== */}
       {/* --- 3. WHY CHOOSE US GRID SECTION ---      */}
-      {/* ========================================== */}
-      <section className="bg-[#FFFDF9] py-16 md:py-24 px-6 md:px-12 lg:px-24 overflow-hidden">
+      <section className="bg-gradient-to-b from-[#ffe9a6] via-[#92845a] to-[#ad9a65]  py-16 md:py-24 px-6 md:px-12 lg:px-24 overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
           <div className="text-center mb-16" data-aos="fade-up">
             <p className="text-[10px] md:text-xs tracking-[0.4em] text-amber-600 uppercase mb-3 font-semibold font-sans">
               Our Values
@@ -591,31 +507,23 @@ export default function Home({ setActiveTab }) {
             </h2>
           </div>
 
-          {/* Cards Grid with Scroll Reveal and Premium Hover */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((item, index) => (
               <div
                 key={index}
-                // Scroll animation triggers card-by-card on scroll
                 data-aos="fade-up"
                 data-aos-delay={index * 150}
                 className="bg-[#F9F6F0]/40 border border-[#e6dfd3]/60 rounded-lg p-8 flex flex-col items-center text-center transition-all duration-500 hover:bg-white hover:shadow-xl hover:shadow-amber-950/[0.02] hover:border-amber-600/30 group relative overflow-hidden cursor-pointer"
               >
-                {/* Circular Icon Container shifting background on hover */}
                 <div className="mb-5 p-4 bg-[#f0eae1] rounded-full transition-all duration-500 group-hover:bg-amber-50 group-hover:scale-110 group-hover:rotate-3 shadow-inner">
                   {item.icon}
                 </div>
-
-                {/* Title with color shift on hover */}
                 <h3 className="text-lg font-serif font-medium text-[#2c221e] mb-3 transition-colors duration-300 group-hover:text-amber-800">
                   {item.title}
                 </h3>
-
                 <p className="text-xs md:text-[13px] text-[#7c695e] font-light leading-relaxed max-w-sm">
                   {item.desc}
                 </p>
-
-                {/* Premium Bottom Accent Line (Grows on hover) */}
                 <span className="absolute bottom-0 left-0 w-0 h-[3px] bg-amber-600 transition-all duration-500 ease-out group-hover:w-full" />
               </div>
             ))}
@@ -624,11 +532,66 @@ export default function Home({ setActiveTab }) {
       </section>
 
       {/* ========================================== */}
-      {/* --- 4. CONTACT & CONSULTATION SECTION ---  */}
-      {/* ========================================== */}
-      <section className="bg-[#FBF9F6] py-20 px-6 md:px-12 lg:px-24 border-t border-[#e6dfd3]">
+      {/* --- 4. OUR WORK GALLERY SECTION ---        */}
+      <section className="bg-gradient-to-b from-[#ffe9a6] via-[#92845a] to-[#ad9a65]  py-20 px-6 md:px-12 lg:px-24 border-t border-[#e6dfd3]">
         <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
+          <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-12">
+            <div>
+              <p className="text-[10px] md:text-xs tracking-[0.4em] text-amber-600 uppercase mb-3 font-semibold font-sans">
+                Portfolio Showcase
+              </p>
+              <h2 className="text-3xl md:text-5xl font-serif font-light text-[#2c221e]">
+                Our Work Gallery
+              </h2>
+              <p className="text-xs md:text-sm text-[#7c695e] font-light mt-3 max-w-xl">
+                Explore some of our standout interior design projects work
+                gallery in Jaipur and across India.
+              </p>
+            </div>
+            <div>
+              <button
+                onClick={() => navigate("/projects")}
+                className="bg-amber-600 text-white px-6 py-3 rounded-md hover:bg-amber-800 transition duration-300"
+              >
+                View All Projects Images
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            {galleryImages.map((img, i) => (
+              <div
+                key={img.id}
+                data-aos="fade-up"
+                data-aos-delay={(i % 4) * 100}
+                className="group relative overflow-hidden rounded-xl bg-[#FAF8F5] border border-[#e6dfd3]/60 aspect-[4/3] shadow-xs cursor-pointer"
+              >
+                <img
+                  src={img.url}
+                  alt={img.title}
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1c1613]/90 via-[#1c1613]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                  <div>
+                    <p className="text-[10px] tracking-widest text-amber-400 uppercase font-sans mb-1">
+                      RL.Interior
+                    </p>
+                    <h4 className="text-sm font-serif text-[#F4F1EA] font-light">
+                      {img.title}
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================== */}
+      {/* --- 5. CONTACT & CONSULTATION SECTION ---  */}
+      <section className="bg-gradient-to-b from-[#ffe9a6] via-[#92845a] to-[#ad9a65]  py-20 px-6 md:px-12 lg:px-24 border-t border-[#e6dfd3]">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <p className="text-[10px] md:text-xs tracking-[0.4em] text-amber-600 uppercase mb-3 font-semibold font-sans">
               Contact Us
@@ -641,263 +604,41 @@ export default function Home({ setActiveTab }) {
             </p>
           </div>
 
-          {/* Main Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            {/* Consultation Form (Left) */}
-            <div className="bg-white border border-[#e6dfd3]/70 rounded-xl p-6 md:p-10 shadow-sm lg:col-span-7">
-              <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-amber-600 block mb-2">
-                Your Dream Space Awaits
-              </span>
-              <h3 className="text-xl md:text-2xl font-serif text-[#2c221e] mb-2">
-                Let's Build Something Beautiful
-              </h3>
-              <p className="text-xs text-[#7c695e] font-light mb-8">
-                Get in touch today and experience professional interior design
-                that's creative, detailed, and built around you.
-              </p>
-
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                  <label className="text-xs font-medium text-[#4a3b32] block mb-1.5">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleInputChange}
-                    placeholder="Enter your name here"
-                    className="w-full bg-[#FAF8F5] border border-[#e6dfd3] rounded-md px-4 py-3 text-sm focus:outline-none focus:border-amber-600 font-light"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-xs font-medium text-[#4a3b32] block mb-1.5">
-                      Mobile Number *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      name="mobileNumber"
-                      value={formData.mobileNumber}
-                      onChange={handleInputChange}
-                      placeholder="Enter your contact number"
-                      className="w-full bg-[#FAF8F5] border border-[#e6dfd3] rounded-md px-4 py-3 text-sm focus:outline-none focus:border-amber-600 font-light"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs font-medium text-[#4a3b32] block mb-1.5">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      name="emailAddress"
-                      value={formData.emailAddress}
-                      onChange={handleInputChange}
-                      placeholder="Enter your email id here"
-                      className="w-full bg-[#FAF8F5] border border-[#e6dfd3] rounded-md px-4 py-3 text-sm focus:outline-none focus:border-amber-600 font-light"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-xs font-medium text-[#4a3b32] block mb-1.5">
-                      Service Type *
-                    </label>
-                    <select
-                      name="serviceType"
-                      value={formData.serviceType}
-                      onChange={handleInputChange}
-                      className="w-full bg-[#FAF8F5] border border-[#e6dfd3] rounded-md px-4 py-3 text-sm focus:outline-none focus:border-amber-600 text-[#4a3b32] font-light"
-                    >
-                      <option>Designing</option>
-                      <option>Turnkey Execution</option>
-                      <option>Consultation Only</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="text-xs font-medium text-[#4a3b32] block mb-1.5">
-                      Project Type *
-                    </label>
-                    <select
-                      name="projectType"
-                      value={formData.projectType}
-                      onChange={handleInputChange}
-                      className="w-full bg-[#FAF8F5] border border-[#e6dfd3] rounded-md px-4 py-3 text-sm focus:outline-none focus:border-amber-600 text-[#4a3b32] font-light"
-                    >
-                      <option>Residential Interior</option>
-                      <option>Commercial Space</option>
-                      <option>Bespoke Villa</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="text-xs font-medium text-[#4a3b32] block mb-1.5">
-                    Choose Floor Plan *
-                  </label>
-                  <select
-                    name="floorPlan"
-                    value={formData.floorPlan}
-                    onChange={handleInputChange}
-                    className="w-full bg-[#FAF8F5] border border-[#e6dfd3] rounded-md px-4 py-3 text-sm focus:outline-none focus:border-amber-600 text-[#4a3b32] font-light"
-                  >
-                    <option>1 BHK / Studio Apartment</option>
-                    <option>2 BHK Interior Design</option>
-                    <option>3 BHK Interior Design</option>
-                    <option>4 BHK / Duplex</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="text-xs font-medium text-[#4a3b32] block mb-1.5">
-                    Project Site Address
-                  </label>
-                  <input
-                    type="text"
-                    name="projectAddress"
-                    value={formData.projectAddress}
-                    onChange={handleInputChange}
-                    placeholder="Write site address to visit"
-                    className="w-full bg-[#FAF8F5] border border-[#e6dfd3] rounded-md px-4 py-3 text-sm focus:outline-none focus:border-amber-600 font-light"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-xs font-medium text-[#4a3b32] block mb-1.5">
-                    Brief About Your Requirement
-                  </label>
-                  <textarea
-                    rows={3}
-                    name="requirements"
-                    value={formData.requirements}
-                    onChange={handleInputChange}
-                    placeholder="Tell us more about your space or expectations"
-                    className="w-full bg-[#FAF8F5] border border-[#e6dfd3] rounded-md px-4 py-3 text-sm focus:outline-none focus:border-amber-600 font-light resize-none"
-                  />
-                </div>
-
-                {/* --- DRAG & DROP SYSTEM FIELD --- */}
-                <div>
-                  <label className="text-xs font-medium text-[#4a3b32] block mb-1.5">
-                    Upload your site layout{" "}
-                    <span className="text-[#7c695e] font-light">
-                      (png, jpeg or pdf format)
-                    </span>
-                  </label>
-                  <div
-                    onDragOver={handleDragOver}
-                    onDragLeave={handleDragLeave}
-                    onDrop={handleDrop}
-                    onClick={() => fileInputRef.current.click()}
-                    className={`border-2 border-dashed rounded-lg p-5 text-center cursor-pointer transition-all duration-200 flex flex-col items-center justify-center ${
-                      isDragging
-                        ? "border-amber-600 bg-amber-50/30"
-                        : "border-[#e6dfd3] bg-[#FAF8F5] hover:bg-[#f3eee6]"
-                    }`}
-                  >
-                    <input
-                      type="file"
-                      ref={fileInputRef}
-                      onChange={handleFileChange}
-                      accept=".png,.jpg,.jpeg,.pdf"
-                      className="hidden"
-                    />
-                    {!uploadedFile ? (
-                      <>
-                        <Upload className="w-6 h-6 text-amber-700/70 mb-2" />
-                        <p className="text-xs text-[#5c4a40]">
-                          <span className="font-semibold text-amber-700">
-                            Click to upload
-                          </span>{" "}
-                          or drag and drop
-                        </p>
-                      </>
-                    ) : (
-                      <div className="flex items-center space-x-3 w-full max-w-xs bg-white border border-[#e6dfd3] p-2 rounded shadow-sm justify-between">
-                        <div className="flex items-center space-x-2 overflow-hidden">
-                          <Upload className="w-4 h-4 text-emerald-600 shrink-0" />
-                          <span className="text-xs text-[#4a3b32] truncate">
-                            {uploadedFile.name}
-                          </span>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            removeFile();
-                          }}
-                          className="text-[10px] uppercase font-bold text-red-500 hover:text-red-700 px-1"
-                        >
-                          Remove
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-2 pt-2">
-                  <input
-                    type="checkbox"
-                    required
-                    id="agreeToTerms"
-                    name="agreeToTerms"
-                    checked={formData.agreeToTerms}
-                    onChange={handleInputChange}
-                    className="mt-1 accent-amber-700 cursor-pointer"
-                  />
-                  <label
-                    htmlFor="agreeToTerms"
-                    className="text-[11px] text-[#7c695e] leading-tight cursor-pointer"
-                  >
-                    By submitting this form, you agree to the privacy policy &
-                    terms and conditions.
-                  </label>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-[#3d2f26] border border-[#524033] text-[#F4F1EA] text-xs tracking-[0.25em] uppercase py-4 rounded-md hover:bg-amber-800 hover:border-amber-700 transition-all duration-300 font-medium cursor-pointer mt-4 shadow-md"
-                >
-                  Request Free Consultation
-                </button>
-              </form>
+            {/* Consultation Form Integration (Left Side) */}
+            <div className="lg:col-span-7 w-full">
+              <ConsultationForm />
             </div>
 
-            {/* Map & Quick Contacts (Right) */}
+            {/* Map & Quick Contacts (Right Side) */}
             <div className="space-y-8 lg:col-span-5 w-full">
-              {/* Google Map */}
-              <div data-aos="fade-left" className="lg:col-span-3 space-y-4">
-          <h4 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-500">Our Location</h4>
-          <a 
-            href={myGoogleMapLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full h-32 bg-[#2c221e] border border-[#3d2f26] rounded-sm overflow-hidden relative shadow-lg group block cursor-pointer"
-          >
-            <iframe
-              src={iframeEmbedSrc}
-              className="w-full h-full opacity-50 group-hover:opacity-100 transition-all duration-500 grayscale invert contrast-125 group-hover:grayscale-0 group-hover:invert-0 group-hover:contrast-100 pointer-events-none"
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Studio Location Map"
-            />
-            <div className="absolute inset-0 border border-amber-600/0 group-hover:border-amber-600/20 pointer-events-none transition-all duration-500" />
-          </a>
-        </div>
+              <div data-aos="fade-left" className="space-y-4">
+                <h4 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-500">
+                  Our Location
+                </h4>
+                <a
+                  href={myGoogleMapLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full h-32 bg-[#2c221e] border border-[#3d2f26] rounded-sm overflow-hidden relative shadow-lg group block cursor-pointer"
+                >
+                  <iframe
+                    src={iframeEmbedSrc}
+                    className="w-full h-full opacity-50 group-hover:opacity-100 transition-all duration-500 grayscale invert contrast-125 group-hover:grayscale-0 group-hover:invert-0 group-hover:contrast-100 pointer-events-none"
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Studio Location Map"
+                  />
+                  <div className="absolute inset-0 border border-amber-600/0 group-hover:border-amber-600/20 pointer-events-none transition-all duration-500" />
+                </a>
+              </div>
 
               {/* Social Media Links */}
               <div className="bg-white border border-[#e6dfd3]/70 rounded-xl p-6 shadow-sm">
                 <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-[#2c221e] mb-5">
                   Follow Us on Social Media
                 </h4>
-
-                {/* Social Items List */}
                 <div className="space-y-3">
                   {socialLinks.map((social, index) => (
                     <a
@@ -908,7 +649,6 @@ export default function Home({ setActiveTab }) {
                       className={`flex items-center justify-between p-3 border border-[#e6dfd3]/40 rounded-lg bg-[#FAF9F6]/30 transition-all duration-300 group cursor-pointer ${social.bgColor}`}
                     >
                       <div className="flex items-center space-x-3">
-                        {/* Circular Icon Container */}
                         <div className="p-2 bg-[#f0eae1] rounded-full transition-transform duration-300 group-hover:scale-110">
                           {social.icon}
                         </div>
@@ -921,8 +661,6 @@ export default function Home({ setActiveTab }) {
                           </p>
                         </div>
                       </div>
-
-                      {/* Micro-arrow indicator */}
                       <ArrowUpRight className="w-4 h-4 text-stone-400 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                     </a>
                   ))}
@@ -934,7 +672,6 @@ export default function Home({ setActiveTab }) {
                 <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-[#2c221e] border-b border-[#e6dfd3] pb-2">
                   Quick Support
                 </h4>
-
                 <div className="flex items-center space-x-3 group cursor-pointer">
                   <div className="p-2 bg-amber-50 text-amber-700 rounded">
                     <Phone size={16} />
@@ -944,7 +681,6 @@ export default function Home({ setActiveTab }) {
                       Phone Support
                     </p>
                     <p className="text-sm font-serif text-[#2c221e] group-hover:text-amber-700 transition-colors">
-                      {" "}
                       <a
                         href="tel:+919876543210"
                         className="hover:text-[#f9af02] transition-colors"
@@ -980,7 +716,7 @@ export default function Home({ setActiveTab }) {
                   </div>
                   <div
                     onClick={() => {
-                      const phoneNumber = "919910889575"; // Aapka WhatsApp Number (Country code '91' ke sath)
+                      const phoneNumber = "919910889575";
                       const message = encodeURIComponent(
                         "Hello RL.Interior team, I would like to consult with a designer regarding my interior project.",
                       );
@@ -1001,70 +737,6 @@ export default function Home({ setActiveTab }) {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================== */}
-      {/* --- 5. NEW ADDITION: OUR WORK GALLERY ---   */}
-      {/* ========================================== */}
-      <section className="bg-[#FFFDF9] py-20 px-6 md:px-12 lg:px-24 border-t border-[#e6dfd3]">
-        <div className="max-w-7xl mx-auto">
-          {/* Gallery Header Row */}
-          <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-12">
-            <div>
-              <p className="text-[10px] md:text-xs tracking-[0.4em] text-amber-600 uppercase mb-3 font-semibold font-sans">
-                Portfolio Showcase
-              </p>
-              <h2 className="text-3xl md:text-5xl font-serif font-light text-[#2c221e]">
-                Our Work Gallery
-              </h2>
-              <p className="text-xs md:text-sm text-[#7c695e] font-light mt-3 max-w-xl">
-                Explore some of our standout interior design projects work
-                gallery in Jaipur and across India.
-              </p>
-            </div>
-
-            {/* View All Projects Button Linking to Navigation State */}
-            <div>
-              <button
-                onClick={() => navigate("/projects")}
-                className="bg-amber-600 text-white px-6 py-3 rounded-md hover:bg-amber-800 transition duration-300"
-              >
-                View All Projects Images
-              </button>
-            </div>
-          </div>
-
-          {/* Gallery Grid (Laptop: 4 Columns | Mobile: 2 Columns | Total 5 Rows) */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {galleryImages.map((img, i) => (
-              <div
-                key={img.id}
-                data-aos="fade-up"
-                data-aos-delay={(i % 4) * 100}
-                className="group relative overflow-hidden rounded-xl bg-[#FAF8F5] border border-[#e6dfd3]/60 aspect-[4/3] shadow-xs cursor-pointer"
-              >
-                {/* Image Component with Hover Subtle Zoom */}
-                <img
-                  src={img.url}
-                  alt={img.title}
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                  loading="lazy"
-                />
-                {/* On-Hover Dark Elegant Overlay & Label */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1c1613]/90 via-[#1c1613]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                  <div>
-                    <p className="text-[10px] tracking-widest text-amber-400 uppercase font-sans mb-1">
-                      RL.Interior
-                    </p>
-                    <h4 className="text-sm font-serif text-[#F4F1EA] font-light">
-                      {img.title}
-                    </h4>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>

@@ -15,8 +15,6 @@ import Blog from "./component/Blog";
 import Faq from "./component/Faq";
 import Testimonial from "./component/Testimonial";
 
-
-
 import ScrollToTop from './component/ScrollToTop';
 import "./App.css";
 
@@ -97,49 +95,50 @@ export default function App() {
     <div className="min-h-screen flex flex-col justify-between selection:bg-amber-100 selection:text-amber-900">
       <ScrollToTop />
       
-      {/* --- PREMIUM NAVBAR --- */}
-      <nav className="fixed top-0 left-0 w-full bg-[#FAF9F6]/80 backdrop-blur-md z-50 border-b border-stone-200/40 px-6 py-5 md:px-12 flex justify-between items-center">
+      {/* --- PREMIUM WOODEN THEME NAVBAR --- */}
+      <nav className="fixed top-0 left-0 w-full bg-[#1c1613]/90 backdrop-blur-md z-50 border-b border-[#3d2f26] px-6 py-4 md:px-12 flex justify-between items-center transition-all duration-300">
         {/* Brand Logo */}
         <div className="text-xl md:text-2xl font-serif tracking-[0.2em] text-stone-800 cursor-pointer" onClick={() => navigate('/')}>
           <img 
             data-aos="zoom-in"
             src={Logo}
             alt="Founder"
-            className="w-[90px] h-[50px] object-cover object-center"
+            className="w-[95px] h-[52px] object-cover object-center brightness-110 contrast-105"
           />
         </div>
 
-        {/* Desktop Tabs */}
-        <div className="hidden lg:flex items-center space-x-8 text-xs uppercase tracking-[0.15em] font-medium">
+        {/* Desktop Tabs (Increased font-size slightly, added elegant under-border transitions) */}
+        <div className="hidden lg:flex items-center space-x-8 text-[13px] uppercase tracking-[0.18em] font-medium">
           {tabs.map((tab) => (
             <NavLink
               key={tab.name}
               to={tab.path}
               className={({ isActive }) => 
-                `transition-all duration-300 relative py-1 ${
-                  isActive ? 'text-amber-800 font-semibold' : 'text-stone-500 hover:text-stone-900'
+                `transition-colors duration-300 relative py-2 block group ${
+                  isActive ? 'text-amber-400 font-semibold' : 'text-[#FAF9F6]/80 hover:text-amber-300'
                 }`
               }
             >
               {({ isActive }) => (
                 <>
                   {tab.name}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-0 w-full h-[1px] bg-amber-800 animate-pulse" />
-                  )}
+                  {/* Smooth Sliding Hover Border Effect */}
+                  <span className={`absolute bottom-0 left-0 h-[2px] bg-amber-500 transition-all duration-300 ${
+                    isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`} />
                 </>
               )}
             </NavLink>
           ))}
 
-          {/* Fixed Pages Dropdown Container */}
+          {/* Pages Dropdown Container */}
           <div 
             ref={dropdownRef}
             className="relative py-2 cursor-pointer group"
             onMouseEnter={() => setPagesDropdownOpen(true)}
             onMouseLeave={() => setPagesDropdownOpen(false)}
           >
-            <span className="text-stone-500 hover:text-stone-900 transition-colors duration-200 flex items-center space-x-1">
+            <span className="text-[#FAF9F6]/80 group-hover:text-amber-300 transition-colors duration-200 flex items-center space-x-1 py-1">
               <span>Pages</span>
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
@@ -151,13 +150,17 @@ export default function App() {
                 strokeWidth="2.5" 
                 strokeLinecap="round" 
                 strokeLinejoin="round" 
-                className={`transition-transform duration-300 ${pagesDropdownOpen ? 'rotate-180' : 'rotate-0'}`}
+                className={`transition-transform duration-300 ${pagesDropdownOpen ? 'rotate-180 text-amber-400' : 'rotate-0'}`}
               >
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </span>
+            {/* Smooth Sliding Hover Border for Dropdown Trigger */}
+            <span className={`absolute bottom-0 left-0 h-[2px] bg-amber-500 transition-all duration-300 ${
+              pagesDropdownOpen ? 'w-full' : 'w-0 group-hover:w-full'
+            }`} />
 
-            {/* Dropdown Menu Overlay (With padding bridge to prevent hover loss) */}
+            {/* Dropdown Menu Overlay */}
             <div 
               className={`absolute top-full left-0 w-44 pt-2 transition-all duration-300 origin-top z-50 ${
                 pagesDropdownOpen 
@@ -165,16 +168,16 @@ export default function App() {
                   : 'opacity-0 scale-95 pointer-events-none -translate-y-2'
               }`}
             >
-              {/* Actual Visual Box */}
-              <div className="bg-[#FAF9F6] border border-stone-200/60 shadow-xl rounded-sm p-2 flex flex-col space-y-1">
+              {/* Wooden Dark Styling for dropdown box */}
+              <div className="bg-[#1c1613] border border-[#3d2f26] shadow-2xl rounded-sm p-2 flex flex-col space-y-1">
                 {pageSubItems.map((subItem) => (
                   <NavLink
                     key={subItem.name}
                     to={subItem.path}
                     onClick={() => setPagesDropdownOpen(false)}
                     className={({ isActive }) => 
-                      `px-3 py-2 text-[10px] tracking-widest text-left uppercase transition-all duration-200 rounded-xs hover:bg-[#1c1613] hover:text-[#FAF9F6] ${
-                        isActive ? 'bg-amber-800/10 text-amber-800 font-semibold' : 'text-stone-600'
+                      `px-3 py-2 text-[11px] tracking-widest text-left uppercase transition-all duration-200 rounded-xs hover:bg-amber-500 hover:text-[#1c1613] ${
+                        isActive ? 'bg-amber-500/20 text-amber-400 font-semibold border-l-2 border-amber-500 pl-2' : 'text-[#FAF9F6]/70'
                       }`
                     }
                   >
@@ -186,19 +189,19 @@ export default function App() {
           </div>
         </div>
 
-        {/* Right Action CTA (Desktop) */}
+        {/* Right Action CTA (Matching Wooden Dark aesthetics) */}
         <div className="hidden lg:flex items-center space-x-4">
           <button 
             onClick={() => setGlobalCallModal(true)} 
-            className="border border-stone-800 text-stone-800 text-[10px] tracking-widest uppercase px-5 py-2.5 hover:bg-stone-900 hover:text-white transition duration-300 cursor-pointer"
+            className="border border-amber-500 text-amber-400 bg-transparent text-[11px] tracking-widest uppercase px-5 py-2.5 hover:bg-amber-500 hover:text-[#1c1613] transition-all duration-300 font-medium rounded-sm cursor-pointer shadow-md"
           >
             Book Call
           </button>
         </div>
 
-        {/* --- MOBILE MENU BUTTON --- */}
+        {/* --- MOBILE MENU BUTTON (Changed color to match light text) --- */}
         <button 
-          className="lg:hidden text-stone-800 p-2 focus:outline-none z-50 relative cursor-pointer" 
+          className="lg:hidden text-[#FAF9F6] p-2 focus:outline-none z-50 relative cursor-pointer" 
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle Menu"
         >
@@ -217,9 +220,9 @@ export default function App() {
         </button>
       </nav>
 
-      {/* --- MOBILE DROPDOWN MENU --- */}
+      {/* --- MOBILE DROPDOWN MENU (Styled with matching wooden theme background) --- */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 bg-[#FAF9F6] z-40 pt-24 px-6 flex flex-col justify-between pb-12 lg:hidden overflow-y-auto animate-fadeIn">
+        <div className="fixed inset-0 bg-[#1c1613] z-40 pt-24 px-6 flex flex-col justify-between pb-12 lg:hidden overflow-y-auto animate-fadeIn">
           <div className="flex flex-col space-y-5">
             {tabs.map((tab) => (
               <NavLink
@@ -227,8 +230,8 @@ export default function App() {
                 to={tab.path}
                 onClick={() => setMobileMenuOpen(false)}
                 className={({ isActive }) => 
-                  `text-left text-lg font-serif tracking-wide ${
-                    isActive ? 'text-amber-800' : 'text-stone-600'
+                  `text-left text-lg font-serif tracking-wide transition-colors duration-200 ${
+                    isActive ? 'text-amber-400 border-l-2 border-amber-500 pl-2' : 'text-[#FAF9F6]/80'
                   }`
                 }
               >
@@ -240,7 +243,7 @@ export default function App() {
             <div className="flex flex-col">
               <button 
                 onClick={() => setMobilePagesOpen(!mobilePagesOpen)}
-                className="text-left text-lg font-serif tracking-wide text-stone-600 flex items-center justify-between py-1 focus:outline-none"
+                className="text-left text-lg font-serif tracking-wide text-[#FAF9F6]/80 flex items-center justify-between py-1 focus:outline-none"
               >
                 <span>Pages</span>
                 <svg 
@@ -253,7 +256,7 @@ export default function App() {
                   strokeWidth="2" 
                   strokeLinecap="round" 
                   strokeLinejoin="round" 
-                  className={`transition-transform duration-300 ${mobilePagesOpen ? 'rotate-180' : 'rotate-0'}`}
+                  className={`transition-transform duration-300 ${mobilePagesOpen ? 'rotate-180 text-amber-400' : 'rotate-0'}`}
                 >
                   <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
@@ -274,7 +277,7 @@ export default function App() {
                     }}
                     className={({ isActive }) => 
                       `text-left text-[14px] font-sans tracking-wider ${
-                        isActive ? 'text-amber-800 font-semibold' : 'text-stone-500'
+                        isActive ? 'text-amber-400 font-semibold' : 'text-[#FAF9F6]/60'
                       }`
                     }
                   >
@@ -285,13 +288,13 @@ export default function App() {
             </div>
           </div>
 
-          <div className="w-full pt-6 border-t border-stone-200 mt-6">
+          <div className="w-full pt-6 border-t border-[#3d2f26] mt-6">
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
                 setGlobalCallModal(true);
               }}
-              className="w-full bg-[#1C2D37] text-white text-xs tracking-widest uppercase py-4 rounded-xs text-center font-medium flex items-center justify-center space-x-2"
+              className="w-full bg-amber-600 hover:bg-amber-700 text-[#1c1613] text-xs tracking-widest uppercase py-4 rounded-xs text-center font-semibold flex items-center justify-center space-x-2 transition-all duration-300"
             >
               <Phone size={14} />
               <span>Book Consultation Call</span>
@@ -316,7 +319,7 @@ export default function App() {
 
       {/* --- GLOBAL CALL CONTROLLER MODAL OVERLAY --- */}
       {globalCallModal && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center z-[9999] px-4 animate-fadeIn">
+        <div className="fixed inset-0 bg-black/75 backdrop-blur-xs flex items-center justify-center z-[9999] px-4 animate-fadeIn">
           <div className="bg-[#FAF9F6] max-w-sm w-full border border-stone-200 p-8 text-center relative shadow-2xl rounded-xs">
             <button 
               onClick={() => setGlobalCallModal(false)}

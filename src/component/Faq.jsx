@@ -32,7 +32,7 @@ export default function Faq() {
   };
 
   return (
-    <section className="bg-[#FAF9F6] mt-[-110px] min-h-screen pt-32 pb-20 px-6 md:px-12 lg:px-24 select-none font-sans">
+    <section className="bg-gradient-to-b from-[#766940] via-[#92845a] to-[#ad9a65] mt-[-110px] min-h-screen pt-32 pb-20 px-6 md:px-12 lg:px-24 select-none font-sans">
       <div className="max-w-4xl mx-auto">
         
         {/* Section Header */}
@@ -50,15 +50,15 @@ export default function Faq() {
         </div>
 
         {/* Accordion List Container */}
-        <div className="space-y-4" data-aos="fade-up" data-aos-delay="100">
+        <div className="mt-[-40px] space-y-4" data-aos="fade-up" data-aos-delay="100">
           {faqData.map((faq, index) => {
             const isOpen = openIndex === index;
             
             return (
               <div 
                 key={index} 
-                className={`border rounded-sm transition-all duration-300 bg-white ${
-                  isOpen ? "border-amber-800/40 shadow-md shadow-stone-100" : "border-stone-200/60 hover:border-stone-400"
+                className={`border rounded-sm transition-all duration-300 bg-[#ad9a65] ${
+                  isOpen ? "border-amber-800/40 shadow-md shadow-stone-800" : "border-stone-200/60 hover:border-stone-400"
                 }`}
               >
                 {/* Accordion Trigger Header */}
@@ -75,10 +75,10 @@ export default function Faq() {
                   {/* Premium Micro-animated Plus/Minus Icon */}
                   <div className="relative w-4 h-4 shrink-0 flex items-center justify-center ml-4">
                     <span className={`absolute block w-3.5 h-[1.5px] bg-current transition-transform duration-300 ${
-                      isOpen ? "text-amber-800 rotate-0" : "text-stone-400 group-hover:text-stone-700"
+                      isOpen ? "text-amber-800 rotate-0" : "text-stone-900 group-hover:text-stone-700"
                     }`} />
                     <span className={`absolute block w-3.5 h-[1.5px] bg-current transition-transform duration-300 ${
-                      isOpen ? "text-amber-800 rotate-0 scale-0" : "text-stone-400 group-hover:text-stone-700 rotate-90"
+                      isOpen ? "text-amber-800 rotate-0 scale-0" : "text-stone-900 group-hover:text-stone-700 rotate-90"
                     }`} />
                   </div>
                 </button>
@@ -89,7 +89,7 @@ export default function Faq() {
                     isOpen ? "max-h-40 border-t border-stone-100" : "max-h-0"
                   }`}
                 >
-                  <p className="p-5 text-xs text-stone-500 leading-relaxed font-light">
+                  <p className="p-5 text-xs text-stone-900 leading-relaxed font-light">
                     {faq.answer}
                   </p>
                 </div>
